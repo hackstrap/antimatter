@@ -24,24 +24,19 @@ const Antimatter = () => {
                 <h1>Welcome to Antimatter</h1>
                 <p>Set Up Your ELT and Analytical infrastructure</p>
                 <div class="cards">
-                    <div className="card">
-                        <div className="main1">
-                        </div>
-                    </div>
-
-
-                    <div className="card">
-                        <div className="main2">
-                        </div>
-                    </div>
+                        <div className="logo logo-jitsu"></div>
+                        <div className="logo logo-clickHouse"></div>
                 </div>
-                <div class="main3">
-                    <p class="jitsu">Centralize data with Jitsu</p>
+
+                <div className="btn-group">
+                <div class="btn-box">
+                    <p class="about">Centralize data with Jitsu</p>
                     <button type = 'submit' class="btn">Start Now</button>
                 </div>
-                <div class="main4">
-                    <p class="click">Connect to your Data Warehouse</p>
-                    <button type = 'submit' class="butn">Start Now</button>
+                <div class="btn-box">
+                    <p class="about">Connect to your Data Warehouse</p>
+                    <button type = 'submit' class="btn">Start Now</button>
+                </div>
                 </div>
             </section>
         </>
