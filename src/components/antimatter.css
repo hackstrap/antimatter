@@ -1,6 +1,10 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
     background-color: #dadada48;
-    
 }
 
 h1{
@@ -19,6 +23,11 @@ p{
     align-items: center;
     font-size: 1rem;
 }
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
 .main_icon{
     display: flex;
     width: fit-content;
@@ -28,7 +37,6 @@ p{
     border-radius: 8px;
     padding-left: 1rem;
     padding-right: 1rem;
-
 }
 
 .icon_div{
@@ -48,95 +56,59 @@ p{
 }
 
 .cards{
-    height: 150px;
-    width: 400px;
-
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
 }
-.main1{
-   position: absolute;
-   margin: auto;
-   margin-top: 6%;
-   margin-left: 500px;
-   height: 250px;
-   width: 250px;
-   align-items: center;
-   background: url("../svg/jitsu.svg") no-repeat; 
-   filter: drop-shadow(0px 0px 2px rgba(30, 21, 83, 0.2));
-   border: solid rgb(243, 228, 228);
-   border-radius: 50px;
-}
-.main2{
-    position: absolute;
+.logo{
     margin: auto;
-    margin-top: 6%;
-    margin-left: 60%;
+    margin-top: 3%;
     height: 250px;
     width: 250px;
     align-items: center;
-    background: url("../svg/abc.svg") no-repeat; 
     filter: drop-shadow(0px 0px 2px rgba(30, 21, 83, 0.2));
     border: solid rgb(243, 228, 228);
     border-radius: 50px;
- }
- .main3{
-    color: rgb(3, 0, 0);
-    margin: auto;
-    margin-top: -4%;
-    margin-left: 25%;
-    position: absolute;
+}
+.logo-jitsu{
+    background: url("../svg/jitsu.svg") no-repeat;
+}
+.logo-clickHouse{
+    background: url("../svg/abc.svg") no-repeat;
+}
+
+
+.btn-group{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 5%;
+}
+
+.btn-box{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 309px;
     height: 110px;
-    top: 770px;
     background: #FFFFFF;
-    /* Main */
-    
     box-shadow: 0px 0px 2px rgba(30, 21, 83, 0.2);
     border-radius: 50px;
 }
-.jitsu{
+
+.about{
     color: rgb(3, 0, 0);
 }
+
 .btn{
-    margin-left: 27%;
-    margin-top: -11px;
-    position: absolute;
     width: 140px;
     height: 35px;
-    
     background: #000000;
     color: seashell;
     border-radius: 8px;
 }
-.main4{
-    color: rgb(3, 0, 0);
-    margin: auto;
-    margin-top: -4%;
-    margin-left: 59%;
-    position: absolute;
-    width: 309px;
-    height: 110px;
-    top: 770px;
-    background: #FFFFFF;
-    /* Main */
-    
-    box-shadow: 0px 0px 2px rgba(30, 21, 83, 0.2);
-    border-radius: 50px;
-}
-.click{
-    color: rgb(3, 0, 0);
-}
-.butn{
-    margin-left: 27%;
-    margin-top: -11px;
-    position: absolute;
-    width: 140px;
-    height: 35px;
-    
-    background: #000000;
-    color: seashell;
-    border-radius: 8px;
-}
-a{
-  text-decoration: none;
-  color: #fff;
-}
+
+
