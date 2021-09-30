@@ -37,11 +37,11 @@ const Antimatter = () => {
                 </div>
                 <div class="main3">
                     <p class="jitsu">Centralize data with Jitsu</p>
-                    <button type = 'submit' class="btn">Start Now</button>
+                    <button type = 'submit' class="btn"><a href="https://jitsu.com/" target="_blank">Start Now</a></button>
                 </div>
                 <div class="main4">
                     <p class="click">Connect to your Data Warehouse</p>
-                    <button type = 'submit' class="butn">Start Now</button>
+                    <button type = 'submit' class="butn"><a href="https://clickhouse.com/" target="_blank">Start Now</a></button>
                 </div>
             </section>
         </>
