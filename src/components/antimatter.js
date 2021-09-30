@@ -33,11 +33,11 @@ const Antimatter = () => {
                     <p class="about">Centralize data with Jitsu</p>
                     <button type = 'submit' class="btn">Start Now</button>
                 </div>
-                <div class="btn-box">
+                  <div class="btn-box">
                     <p class="about">Connect to your Data Warehouse</p>
                     <button type = 'submit' class="btn">Start Now</button>
                 </div>
-                </div>
+              </div>
             </section>
         </>
     )

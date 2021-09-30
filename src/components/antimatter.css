@@ -23,6 +23,11 @@ p{
     align-items: center;
     font-size: 1rem;
 }
+a{
+  text-decoration: none;
+  color: #fff;
+}
+
 .main_icon{
     display: flex;
     width: fit-content;
@@ -105,5 +110,3 @@ p{
     color: seashell;
     border-radius: 8px;
 }
-
-
