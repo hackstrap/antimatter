@@ -1,0 +1,22 @@
+<yandex>
+    <zookeeper>
+        <node>
+            <host>zoo-one</host>
+            <port>2181</port>
+        </node>
+        <node>
+            <host>zoo-two</host>
+            <port>2182</port>
+        </node>
+        <node>
+            <host>zoo-three</host>
+            <port>2183</port>
+        </node>
+        <session_timeout_ms>30000</session_timeout_ms>
+        <operation_timeout_ms>10000</operation_timeout_ms>
+        <!-- Optional. Chroot suffix. Should exist. -->
+        <root>/path/to/zookeeper/node</root>
+        <!-- Optional. ZooKeeper digest ACL string. -->
+        <identity>user:password</identity>
+    </zookeeper>
+</yandex>

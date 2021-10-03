@@ -1,0 +1,97 @@
+#
+#  Docker Compose file for deploying antimatter services.
+#  Created On 03 October 2021
+#
+
+version: "3.8"
+services:
+    zoo-one:
+        image: zookeeper:latest
+        container_name: zoo-one
+        restart: always
+        hostname: zoo-one
+        ports:
+            - 2181:2181
+        environment:
+            - ZOO_MY_ID=1
+            - server.1=zoo-one:2888:3888;2181 server.2=zoo-two:2888:3888;2181 server.3=zoo-three:2888:3888;2181
+        
+    zoo-two:
+        image: zookeeper:latest
+        container_name: zoo-two
+        restart: always
+        hostname: zoo-two
+        ports:
+            - 2182:2181
+        environment:
+            - ZOO_MY_ID=2
+            - server.1=zoo-one:2888:3888;2181 server.2=zoo-two:2888:3888;2181 server.3=zoo-three:2888:3888;2181
+
+    zoo-three:
+        image: zookeeper:latest
+        container_name: zoo-three
+        restart: always
+        hostname: zoo-three
+        ports:
+            - 2183:2181
+        environment:
+            - ZOO_MY_ID=3
+            - server.1=zoo-one:2888:3888;2181 server.2=zoo-two:2888:3888;2181 server.3=zoo-three:2888:3888;2181
+
+    clickhouse-server:
+        image: yandex/clickhouse-server
+        container_name: clickhouse-server
+        restart: always
+        ports:
+          - 8123:8123
+        volumes:
+          - ./clickhouse:/var/lib/clickhouse
+          - ./zookeeper.xml:/etc/clickhouse-server/config.d/zookeeper.xml
+    
+    postgres:
+        image: postgres:9.6-alpine
+        container_name: postgres
+        restart: always
+        volumes:
+            - ./postgres:/var/lib/postgresql/data/pgdata
+        environment:
+            PGDATA: /var/lib/postgresql/data/pgdata
+            POSTGRES_PASSWORD: UCDoCjYxCFWReZeyJjovrrfczXgvPnvB
+
+    redis:
+        image: redis:6.2.4-alpine
+        container_name: redis
+        restart: always
+        volumes:
+            - ./redis:/data
+
+    jitsu:
+        image: jitsucom/jitsu:latest
+        container_name: jitsu
+        restart: always
+        depends_on:
+            - redis
+        ports:
+            - 8000:8000
+        environment:
+            - REDIS_URL=redis://redis:6379
+            - UI_AUTH_REFRESH_SECRET=ULWBZyNfBeXPPVbwsEwgNVezsbjjyVdq
+            - UI_AUTH_ACCESS_SECRET=sNVPJZnQZLMpKXvVHfdHMnitNHsRmURC
+        volumes:
+            - ./jitsu/configurator:/home/configurator/data/logs
+            - ./jitsu/events:/home/eventnative/data/logs/events
+            - ./jitsu/login:/home/eventnative/data/logs
+
+    redash:
+        image: redash/redash
+        container_name: redash
+        restart: always
+        ports:
+            - 5000:5000
+        depends_on:
+            - postgres
+            - redis
+        environment:
+            - REDASH_WEB_WORKERS=4
+            - REDIS_URL=redis://redis:6379
+            - REDASH_DATABASE_URL=postgresql://postgres:UCDoCjYxCFWReZeyJjovrrfczXgvPnvB@postgres/postgres
