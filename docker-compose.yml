@@ -10,17 +10,21 @@ services:
         container_name: zoo-one
         restart: always
         hostname: zoo-one
+        depends_on:
+            - zoo-two
         ports:
             - 2181:2181
         environment:
             - ZOO_MY_ID=1
             - server.1=zoo-one:2888:3888;2181 server.2=zoo-two:2888:3888;2181 server.3=zoo-three:2888:3888;2181
-        
+
     zoo-two:
         image: zookeeper:latest
         container_name: zoo-two
         restart: always
         hostname: zoo-two
+        depends_on:
+            - zoo-three
         ports:
             - 2182:2181
         environment:
@@ -42,12 +46,16 @@ services:
         image: yandex/clickhouse-server
         container_name: clickhouse-server
         restart: always
+        depends_on:
+            - zoo-one
+            - zoo-two
+            - zoo-three
         ports:
-          - 8123:8123
+            - 8123:8123
         volumes:
-          - ./clickhouse:/var/lib/clickhouse
-          - ./zookeeper.xml:/etc/clickhouse-server/config.d/zookeeper.xml
-    
+            - ./clickhouse:/var/lib/clickhouse
+            - ./zookeeper.xml:/etc/clickhouse-server/config.d/zookeeper.xml
+
     postgres:
         image: postgres:9.6-alpine
         container_name: postgres
@@ -82,16 +90,17 @@ services:
             - ./jitsu/events:/home/eventnative/data/logs/events
             - ./jitsu/login:/home/eventnative/data/logs
 
-    redash:
-        image: redash/redash
-        container_name: redash
+    sqlpad:
+        image: sqlpad/sqlpad:latest
+        container_name: sqlpad
         restart: always
         ports:
-            - 5000:5000
-        depends_on:
-            - postgres
-            - redis
+            - 3000:3000
+        volumes:
+            - ./sqlpad:/var/lib/sqlpad
         environment:
-            - REDASH_WEB_WORKERS=4
-            - REDIS_URL=redis://redis:6379
-            - REDASH_DATABASE_URL=postgresql://postgres:UCDoCjYxCFWReZeyJjovrrfczXgvPnvB@postgres/postgres
+            - SQLPAD_AUTH_DISABLED=true
+            - SQLPAD_AUTH_DISABLED_DEFAULT_ROLE=admin
+            - SQLPAD_USERPASS_AUTH_DISABLED=true
+            - SQLPAD_ADMIN_PASSWORD=5aWC9bWss2kZjr6MoowFokbPqrFEagts
+            - SQLPAD_ADMIN=example@example.com
