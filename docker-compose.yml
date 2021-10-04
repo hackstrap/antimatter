@@ -42,9 +42,9 @@ services:
             - ZOO_MY_ID=3
             - server.1=zoo-one:2888:3888;2181 server.2=zoo-two:2888:3888;2181 server.3=zoo-three:2888:3888;2181
 
-    clickhouse-server:
+    clickhouse:
         image: yandex/clickhouse-server
-        container_name: clickhouse-server
+        container_name: clickhouse
         restart: always
         depends_on:
             - zoo-one
@@ -104,3 +104,13 @@ services:
             - SQLPAD_USERPASS_AUTH_DISABLED=true
             - SQLPAD_ADMIN_PASSWORD=5aWC9bWss2kZjr6MoowFokbPqrFEagts
             - SQLPAD_ADMIN=example@example.com
+
+    cube:
+        image: cubejs/cube
+        restart: always
+        ports:
+            - 4000:4000
+        volumes:
+            - ./cube:/cube/conf
+        environment:
+            - CUBEJS_DEV_MODE=true
