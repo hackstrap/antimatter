@@ -114,3 +114,10 @@ services:
             - ./cube:/cube/conf
         environment:
             - CUBEJS_DEV_MODE=true
+
+    trino:
+        image: trinodb/trino
+        container_name: trino
+        restart: always
+        ports:
+            - 8080:8080
