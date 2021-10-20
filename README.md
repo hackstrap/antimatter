@@ -103,7 +103,7 @@ If you go to your repository on GitHub, you'll see a `Compare & pull request` bu
 
 # 🔗 Links
 - <a target="_blank" rel="noopener" href="http://localhost:8123/play">Clickhouse</a>
-- <a target="_blank" rel="noopener" href="http://localhost:8000/configurator">Jitsu</a>
+- <a target="_blank" rel="noopener" href="http://localhost:8001/configurator">Jitsu</a>
 - <a target="_blank" rel="noopener" href="http://localhost:3000">SQLPad</a>
 - <a target="_blank" rel="noopener" href="http://localhost:4000/#/connection">Cube.js</a>
 - <a target="_blank" rel="noopener" href="http://localhost:8080/ui/login.html">Trino</a>

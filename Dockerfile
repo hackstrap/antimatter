@@ -1,6 +1,7 @@
 FROM node:15.3-alpine
-WORKDIR /antimatter
-ENV PATH = "./node_modules/.bin:$PATH"
+# WORKDIR /antimatter
+# ENV PATH = "./node_modules/.bin:$PATH"
 COPY . .
+RUN npm install
 RUN npm run build
 CMD ["npm", "start"]

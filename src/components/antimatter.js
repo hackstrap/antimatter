@@ -26,7 +26,7 @@ const Antimatter = () => {
                 <div class="jitsue">
                         <p class="about"><span class="dot">1</span>Centralize data with Jitsu</p>
                         <div className="logo logo-jitsu"></div>
-                        <button type = 'submit' class="btn"><a href="http://localhost:8000/configurator" target="_blank">Start Now</a></button>
+                        <button type = 'submit' class="btn"><a href="http://localhost:8001/configurator" target="_blank">Start Now</a></button>
                 </div>
                 <div class="clickHousee">
                         <p class="about"><span class="dot">2</span>Connect to your Data Warehouse</p>
