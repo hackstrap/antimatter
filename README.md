@@ -107,7 +107,7 @@ If you go to your repository on GitHub, you'll see a `Compare & pull request` bu
 - <a target="_blank" rel="noopener" href="http://localhost:3000">SQLPad</a>
 - <a target="_blank" rel="noopener" href="http://localhost:4000/#/connection">Cube.js</a>
 - <a target="_blank" rel="noopener" href="http://localhost:8080/ui/login.html">Trino</a>
-- <a target="_blank" rel="noopener" href="http://localhost:3001/">Metabase</a>
+- <a target="_blank" rel="noopener" href="http://localhost:3001/">Metabase</a> 
 
 > **Note:** A minimum of 16GB RAM is required to start all the services at once. Insufficient RAM could result in crashing of the Docker daemon.
 
