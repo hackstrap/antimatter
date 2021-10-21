@@ -12,56 +12,14 @@ services:
         volumes:
             - .:/antimatter
 
-    zoo-one:
-        image: zookeeper:latest
-        container_name: zoo-one
-        restart: always
-        hostname: zoo-one
-        depends_on:
-            - zoo-two
-        ports:
-            - 2181:2181
-        environment:
-            - ZOO_MY_ID=1
-            - server.1=zoo-one:2888:3888;2181 server.2=zoo-two:2888:3888;2181 server.3=zoo-three:2888:3888;2181
-
-    zoo-two:
-        image: zookeeper:latest
-        container_name: zoo-two
-        restart: always
-        hostname: zoo-two
-        depends_on:
-            - zoo-three
-        ports:
-            - 2182:2181
-        environment:
-            - ZOO_MY_ID=2
-            - server.1=zoo-one:2888:3888;2181 server.2=zoo-two:2888:3888;2181 server.3=zoo-three:2888:3888;2181
-
-    zoo-three:
-        image: zookeeper:latest
-        container_name: zoo-three
-        restart: always
-        hostname: zoo-three
-        ports:
-            - 2183:2181
-        environment:
-            - ZOO_MY_ID=3
-            - server.1=zoo-one:2888:3888;2181 server.2=zoo-two:2888:3888;2181 server.3=zoo-three:2888:3888;2181
-
     clickhouse:
         image: yandex/clickhouse-server
         container_name: clickhouse
         restart: always
-        depends_on:
-            - zoo-one
-            - zoo-two
-            - zoo-three
         ports:
             - 8123:8123
         volumes:
             - ./clickhouse:/var/lib/clickhouse
-            - ./zookeeper.xml:/etc/clickhouse-server/config.d/zookeeper.xml
 
     postgres:
         image: postgres:9.6-alpine
