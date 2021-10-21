@@ -1,15 +1,16 @@
 version: "3.8"
 services:
-    app:
+    antimatter:
+        image: app:react
+        command: npm start
         build:
             context: .
-        volumes:
-            - .:/antimatter-app
+        container_name: antimatter
+        restart: always
         ports:
             - 3000:3000
-        image: app:react
-        container_name: antimatter-app
-        command: npm start
+        volumes:
+            - .:/antimatter
 
     zoo-one:
         image: zookeeper:latest
