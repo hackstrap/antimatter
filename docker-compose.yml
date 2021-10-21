@@ -89,7 +89,7 @@ services:
             - 8080:8080
 
     metabase:
-        image: metabase/metabase
+        image: bjeanes/metabase-clickhouse
         container_name: metabase
         restart: always
         ports:
