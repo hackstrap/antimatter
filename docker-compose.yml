@@ -55,6 +55,7 @@ services:
             - ./backend/jitsu/configurator:/home/configurator/data/logs
             - ./backend/jitsu/events:/home/eventnative/data/logs/events
             - ./backend/jitsu/login:/home/eventnative/data/logs
+            # - /var/run/docker.sock:/var/run/docker.sock
 
     sqlpad:
         image: sqlpad/sqlpad:latest
