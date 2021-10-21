@@ -12,16 +12,6 @@ services:
         volumes:
             - .:/antimatter
 
-    clickhouse:
-        image: yandex/clickhouse-server
-        container_name: clickhouse
-        restart: always
-        ports:
-            - 8123:8123
-            - 9000:9000
-        volumes:
-            - ./backend/clickhouse:/var/lib/clickhouse
-
     postgres:
         image: postgres:9.6-alpine
         container_name: postgres
@@ -38,6 +28,16 @@ services:
         restart: always
         volumes:
             - ./backend/redis:/data
+
+    clickhouse:
+        image: yandex/clickhouse-server
+        container_name: clickhouse
+        restart: always
+        ports:
+            - 8123:8123
+            - 9000:9000
+        volumes:
+            - ./backend/clickhouse:/var/lib/clickhouse
 
     jitsu:
         image: jitsucom/jitsu:latest
