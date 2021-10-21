@@ -11,7 +11,7 @@
 # This is an ELT and analytics project
 <a target="_blank" rel="noopener" href="https://antimatter-hackstrap.gitbook.io/antimatter/">Documentation</a>
 
-# 🚀CONTRIBUTING GUIDLINES
+# 🚀 CONTRIBUTING GUIDELINES
 
 This project aims to simplify Modern ETL and Data Analytics Engine
 
