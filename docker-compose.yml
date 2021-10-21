@@ -18,15 +18,16 @@ services:
         restart: always
         ports:
             - 8123:8123
+            - 9000:9000
         volumes:
-            - ./clickhouse:/var/lib/clickhouse
+            - ./backend/clickhouse:/var/lib/clickhouse
 
     postgres:
         image: postgres:9.6-alpine
         container_name: postgres
         restart: always
         volumes:
-            - ./postgres:/var/lib/postgresql/data/pgdata
+            - ./backend/postgres:/var/lib/postgresql/data/pgdata
         environment:
             PGDATA: /var/lib/postgresql/data/pgdata
             POSTGRES_PASSWORD: UCDoCjYxCFWReZeyJjovrrfczXgvPnvB
@@ -36,7 +37,7 @@ services:
         container_name: redis
         restart: always
         volumes:
-            - ./redis:/data
+            - ./backend/redis:/data
 
     jitsu:
         image: jitsucom/jitsu:latest
@@ -51,9 +52,9 @@ services:
             - UI_AUTH_REFRESH_SECRET=ULWBZyNfBeXPPVbwsEwgNVezsbjjyVdq
             - UI_AUTH_ACCESS_SECRET=sNVPJZnQZLMpKXvVHfdHMnitNHsRmURC
         volumes:
-            - ./jitsu/configurator:/home/configurator/data/logs
-            - ./jitsu/events:/home/eventnative/data/logs/events
-            - ./jitsu/login:/home/eventnative/data/logs
+            - ./backend/jitsu/configurator:/home/configurator/data/logs
+            - ./backend/jitsu/events:/home/eventnative/data/logs/events
+            - ./backend/jitsu/login:/home/eventnative/data/logs
 
     sqlpad:
         image: sqlpad/sqlpad:latest
@@ -62,7 +63,7 @@ services:
         ports:
             - 3002:3000
         volumes:
-            - ./sqlpad:/var/lib/sqlpad
+            - ./backend/sqlpad:/var/lib/sqlpad
         environment:
             - SQLPAD_AUTH_DISABLED=true
             - SQLPAD_AUTH_DISABLED_DEFAULT_ROLE=admin
@@ -76,7 +77,7 @@ services:
         ports:
             - 4000:4000
         volumes:
-            - ./cube:/cube/conf
+            - ./backend/cube:/cube/conf
         environment:
             - CUBEJS_DEV_MODE=true
 
@@ -94,6 +95,6 @@ services:
         ports:
             - 3001:3000
         volumes:
-            - ./metabase:/metabase-data
+            - ./backend/metabase:/metabase-data
         environment:
             - MB_DB_FILE=/metabase-data/metabase.db
