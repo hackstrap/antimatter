@@ -1,101 +1,101 @@
 version: "3.8"
 services:
-    antimatter:
-        image: app:react
-        command: npm start
-        build:
-            context: .
-        container_name: antimatter
-        restart: always
-        ports:
-            - 3000:3000
-        volumes:
-            - .:/antimatter
+  antimatter:
+    image: app:react
+    command: npm start
+    build:
+      context: .
+    container_name: antimatter
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/antimatter
 
-    postgres:
-        image: postgres:9.6-alpine
-        container_name: postgres
-        restart: always
-        volumes:
-            - ./backend/postgres:/var/lib/postgresql/data/pgdata
-        environment:
-            PGDATA: /var/lib/postgresql/data/pgdata
-            POSTGRES_PASSWORD: UCDoCjYxCFWReZeyJjovrrfczXgvPnvB
+  postgres:
+    image: postgres:9.6-alpine
+    container_name: postgres
+    restart: always
+    volumes:
+      - ./backend/postgres:/var/lib/postgresql/data/pgdata
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: UCDoCjYxCFWReZeyJjovrrfczXgvPnvB
 
-    redis:
-        image: redis:6.2.4-alpine
-        container_name: redis
-        restart: always
-        volumes:
-            - ./backend/redis:/data
+  redis:
+    image: redis:6.2.4-alpine
+    container_name: redis
+    restart: always
+    volumes:
+      - ./backend/redis:/data
 
-    clickhouse:
-        image: yandex/clickhouse-server
-        container_name: clickhouse
-        restart: always
-        ports:
-            - 8123:8123
-            - 9000:9000
-        volumes:
-            - ./backend/clickhouse:/var/lib/clickhouse
+  clickhouse:
+    image: yandex/clickhouse-server
+    container_name: clickhouse
+    restart: always
+    ports:
+      - 8123:8123
+      - 9000:9000
+    volumes:
+      - ./backend/clickhouse:/var/lib/clickhouse
 
-    jitsu:
-        image: jitsucom/jitsu:latest
-        container_name: jitsu
-        restart: always
-        depends_on:
-            - redis
-        ports:
-            - 8001:8000
-        environment:
-            - REDIS_URL=redis://redis:6379
-            - UI_AUTH_REFRESH_SECRET=ULWBZyNfBeXPPVbwsEwgNVezsbjjyVdq
-            - UI_AUTH_ACCESS_SECRET=sNVPJZnQZLMpKXvVHfdHMnitNHsRmURC
-        volumes:
-            - ./backend/jitsu/configurator:/home/configurator/data/logs
-            - ./backend/jitsu/events:/home/eventnative/data/logs/events
-            - ./backend/jitsu/login:/home/eventnative/data/logs
-            # - /var/run/docker.sock:/var/run/docker.sock
+  jitsu:
+    image: jitsucom/jitsu:latest
+    container_name: jitsu
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - 8001:8000
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - UI_AUTH_REFRESH_SECRET=ULWBZyNfBeXPPVbwsEwgNVezsbjjyVdq
+      - UI_AUTH_ACCESS_SECRET=sNVPJZnQZLMpKXvVHfdHMnitNHsRmURC
+    volumes:
+      - ./backend/jitsu/configurator:/home/configurator/data/logs
+      - ./backend/jitsu/events:/home/eventnative/data/logs/events
+      - ./backend/jitsu/login:/home/eventnative/data/logs
+      - /var/run/docker.sock:/var/run/docker.sock
 
-    sqlpad:
-        image: sqlpad/sqlpad:latest
-        container_name: sqlpad
-        restart: always
-        ports:
-            - 3002:3000
-        volumes:
-            - ./backend/sqlpad:/var/lib/sqlpad
-        environment:
-            - SQLPAD_AUTH_DISABLED=true
-            - SQLPAD_AUTH_DISABLED_DEFAULT_ROLE=admin
-            - SQLPAD_USERPASS_AUTH_DISABLED=true
-            - SQLPAD_ADMIN_PASSWORD=5aWC9bWss2kZjr6MoowFokbPqrFEagts
-            - SQLPAD_ADMIN=example@example.com
+  sqlpad:
+    image: sqlpad/sqlpad:latest
+    container_name: sqlpad
+    restart: always
+    ports:
+      - 3002:3000
+    volumes:
+      - ./backend/sqlpad:/var/lib/sqlpad
+    environment:
+      - SQLPAD_AUTH_DISABLED=true
+      - SQLPAD_AUTH_DISABLED_DEFAULT_ROLE=admin
+      - SQLPAD_USERPASS_AUTH_DISABLED=true
+      - SQLPAD_ADMIN_PASSWORD=5aWC9bWss2kZjr6MoowFokbPqrFEagts
+      - SQLPAD_ADMIN=example@example.com
 
-    cube:
-        image: cubejs/cube
-        restart: always
-        ports:
-            - 4000:4000
-        volumes:
-            - ./backend/cube:/cube/conf
-        environment:
-            - CUBEJS_DEV_MODE=true
+  cube:
+    image: cubejs/cube
+    restart: always
+    ports:
+      - 4000:4000
+    volumes:
+      - ./backend/cube:/cube/conf
+    environment:
+      - CUBEJS_DEV_MODE=true
 
-    trino:
-        image: trinodb/trino
-        container_name: trino
-        restart: always
-        ports:
-            - 8080:8080
+  trino:
+    image: trinodb/trino
+    container_name: trino
+    restart: always
+    ports:
+      - 8080:8080
 
-    metabase:
-        image: bjeanes/metabase-clickhouse
-        container_name: metabase
-        restart: always
-        ports:
-            - 3001:3000
-        volumes:
-            - ./backend/metabase:/metabase-data
-        environment:
-            - MB_DB_FILE=/metabase-data/metabase.db
+  metabase:
+    image: bjeanes/metabase-clickhouse
+    container_name: metabase
+    restart: always
+    ports:
+      - 3001:3000
+    volumes:
+      - ./backend/metabase:/metabase-data
+    environment:
+      - MB_DB_FILE=/metabase-data/metabase.db

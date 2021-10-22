@@ -9,6 +9,7 @@
 <br>
 
 # This is an ELT and analytics project
+
 <a target="_blank" rel="noopener" href="https://antimatter-hackstrap.gitbook.io/antimatter/">Documentation</a>
 
 # 🚀 CONTRIBUTING GUIDELINES
@@ -35,7 +36,7 @@ where "url you just copied" (without the quotation marks) is the url to this rep
 For example:
 
 ```
-git clone https://github.com/YOUR-USERNAME/antimatter.git 
+git clone https://github.com/YOUR-USERNAME/antimatter.git
 ```
 
 where `YOUR-USERNAME` is your GitHub username. Here you're copying the contents of the first-contributions repository on GitHub to your computer.
@@ -62,14 +63,7 @@ For example:
 git checkout -b backend
 ```
 
-
 ## Make necessary changes and commit those changes
-
-Make the necessary changes by running 
-``` Run docker compose up ```
-
-> **Note:** Substitute `docker compose up` with `docker-compose up` in case the `docker compose` is not a recognized command.
-
 
 If you go to the project directory and execute the command `git status`, you'll see there are changes.
 
@@ -101,13 +95,39 @@ replacing `<add-your-branch-name>` with the name of the branch you created earli
 
 If you go to your repository on GitHub, you'll see a `Compare & pull request` button. Click on that button.
 
+## Getting started with the applications
+
+> **Note:** You need a linux environment to run this application.
+
+First build the react app by running the below command
+
+`docker compose build antimatter`
+
+Now you can individually build each service one by one
+
+`docker compose up --no-deps clickhouse`
+
+`docker compose up --no-deps redis jitsu`
+
+> **Note:** You need to run chmod to give the necessary folder access to jitsu.
+
+`docker compose up --no-deps sqlpad`
+
+`docker compose up --no-deps trino`
+
+`docker compose up --no-deps cube`
+
+`docker compose up --no-deps metabase`
+
+Now access the antimatter application on http://localhost:3000
+
 # 🔗 Links
+
 - <a target="_blank" rel="noopener" href="http://localhost:8123/play">Clickhouse</a>
 - <a target="_blank" rel="noopener" href="http://localhost:8001/configurator">Jitsu</a>
 - <a target="_blank" rel="noopener" href="http://localhost:3000">SQLPad</a>
 - <a target="_blank" rel="noopener" href="http://localhost:4000/#/connection">Cube.js</a>
 - <a target="_blank" rel="noopener" href="http://localhost:8080/ui/login.html">Trino</a>
-- <a target="_blank" rel="noopener" href="http://localhost:3001/">Metabase</a>  
+- <a target="_blank" rel="noopener" href="http://localhost:3001/">Metabase</a>
 
 > **Note:** A minimum of 16GB RAM is required to start all the services at once. Insufficient RAM could result in crashing of the Docker daemon.
-
