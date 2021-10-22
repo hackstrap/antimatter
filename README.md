@@ -103,21 +103,11 @@ First build the react app by running the below command
 
 `docker compose build antimatter`
 
-Now you can individually build each service one by one
+Now run the docker compose command to set up all services
 
-`docker compose up --no-deps clickhouse`
+`docker compose up -d`
 
-`docker compose up --no-deps redis jitsu`
-
-> **Note:** You need to run chmod to give the necessary folder access to jitsu.
-
-`docker compose up --no-deps sqlpad`
-
-`docker compose up --no-deps trino`
-
-`docker compose up --no-deps cube`
-
-`docker compose up --no-deps metabase`
+> **Note:** You may need to run chmod to give the necessary folder access to jitsu.
 
 Now access the antimatter application on http://localhost:3000
 
