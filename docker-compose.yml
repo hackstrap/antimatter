@@ -13,7 +13,7 @@ services:
       - clickhouse
     volumes:
       - ./backend/jupyter-data-dir:/home/jovyan/work
-      - ./backend/clickhouse_helper.py:./clickhouse_helper.py
+      - ./clickhouse_helper.py:/home/jovyan/work/clickhouse_helper.py
     # for password using generate pwd hash IPython.lib.passwd()
     # command: start-notebook.sh --NotebookApp.password='sha1:92557d72fa24:0bb69987c3b3c6218f466258ee0e5e2a87e34671'
 
@@ -27,7 +27,7 @@ services:
     # VALUES:
     # NAME: CH
     # UserName: default
-  
+
   antimatter:
     image: app:react
     command: npm start
@@ -64,7 +64,7 @@ services:
     ports:
       - 8123:8123
       - 9000:9000
-    volumes:  
+    volumes:
       - ./backend/clickhouse:/var/lib/clickhouse
 
   jitsu:
@@ -83,7 +83,7 @@ services:
       - ./backend/jitsu/configurator:/home/configurator/data/logs
       - ./backend/jitsu/events:/home/eventnative/data/logs/events
       - ./backend/jitsu/login:/home/eventnative/data/logs
-      - ./backend/var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
 
   sqlpad:
     image: sqlpad/sqlpad:latest
