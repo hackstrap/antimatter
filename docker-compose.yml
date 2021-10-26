@@ -1,33 +1,5 @@
 version: "3.8"
 services:
-  jupyter:
-    image: jupyter/datascience-notebook
-    restart: unless-stopped
-    ports:
-      - 8888:8888
-    environment:
-      JUPYTER_TOKEN: easy #URL:PORT/?token=easy
-      NB_UID: 1000
-      NB_GID: 100
-    links:
-      - clickhouse
-    volumes:
-      - ./backend/jupyter-data-dir:/home/jovyan/work
-      - ./clickhouse_helper.py:/home/jovyan/work/clickhouse_helper.py
-    # for password using generate pwd hash IPython.lib.passwd()
-    # command: start-notebook.sh --NotebookApp.password='sha1:92557d72fa24:0bb69987c3b3c6218f466258ee0e5e2a87e34671'
-
-  tabix:
-    image: spoonest/clickhouse-tabix-web-client
-    restart: unless-stopped
-    links:
-      - clickhouse
-    ports:
-      - 8081:80
-    # VALUES:
-    # NAME: CH
-    # UserName: default
-
   antimatter:
     image: app:react
     command: npm start
@@ -85,6 +57,17 @@ services:
       - ./backend/jitsu/login:/home/eventnative/data/logs
       - /var/run/docker.sock:/var/run/docker.sock
 
+  tabix:
+    image: spoonest/clickhouse-tabix-web-client
+    restart: unless-stopped
+    links:
+      - clickhouse
+    ports:
+      - 8081:80
+    # VALUES:
+    # NAME: CH
+    # UserName: default
+
   sqlpad:
     image: sqlpad/sqlpad:latest
     container_name: sqlpad
@@ -99,6 +82,23 @@ services:
       - SQLPAD_USERPASS_AUTH_DISABLED=true
       - SQLPAD_ADMIN_PASSWORD=5aWC9bWss2kZjr6MoowFokbPqrFEagts
       - SQLPAD_ADMIN=example@example.com
+
+  jupyter:
+    image: jupyter/datascience-notebook
+    restart: unless-stopped
+    ports:
+      - 8888:8888
+    environment:
+      JUPYTER_TOKEN: easy #URL:PORT/?token=easy
+      NB_UID: 1000
+      NB_GID: 100
+    links:
+      - clickhouse
+    volumes:
+      - ./backend/jupyter-data-dir:/home/jovyan/work
+      - ./clickhouse_helper.py:/home/jovyan/work/clickhouse_helper.py
+    # for password using generate pwd hash IPython.lib.passwd()
+    # command: start-notebook.sh --NotebookApp.password='sha1:92557d72fa24:0bb69987c3b3c6218f466258ee0e5e2a87e34671'
 
   cube:
     image: cubejs/cube
