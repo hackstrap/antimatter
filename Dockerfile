@@ -1,4 +1,4 @@
-FROM node:15.3-alpine
+FROM node:16-alpine
 # WORKDIR /antimatter
 # ENV PATH = "./node_modules/.bin:$PATH"
 COPY . .
