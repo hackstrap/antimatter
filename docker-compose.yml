@@ -51,10 +51,14 @@ services:
       - REDIS_URL=redis://redis:6379
       - UI_AUTH_REFRESH_SECRET=ULWBZyNfBeXPPVbwsEwgNVezsbjjyVdq
       - UI_AUTH_ACCESS_SECRET=sNVPJZnQZLMpKXvVHfdHMnitNHsRmURC
+      - SERVER_ADMIN_TOKEN=sNVPJZnSIKLJUHFBVIURHZDUnitNHsRmURC
+      - CONFIGURATOR_ADMIN_TOKEN=salhfgLIARVUGiygdaLAGFRRLIGxnb
     volumes:
       - ./backend/jitsu/configurator:/home/configurator/data/logs
       - ./backend/jitsu/events:/home/eventnative/data/logs/events
       - ./backend/jitsu/login:/home/eventnative/data/logs
+      - ./backend/jitsu/login:/home/eventnative/data/airbyte
+      - workspace:/home/eventnative/data/airbyte
       - /var/run/docker.sock:/var/run/docker.sock
 
   tabix:
@@ -127,3 +131,7 @@ services:
       - ./backend/metabase:/metabase-data
     environment:
       - MB_DB_FILE=/metabase-data/metabase.db
+
+volumes:
+  workspace:
+    name: jitsu_workspace
