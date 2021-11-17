@@ -142,3 +142,4 @@ dist
 
 # backend directories
 backend
+compose-data
